@@ -189,13 +189,10 @@
       box-shadow: 0 0 40px rgba(122,255,46,0.55) !important;
       transform: translateY(-2px) !important;
     }
-    /* Hide mobile img on desktop */
-    #hero-mobile-img { display: none; }
     /* Mobile overrides (inline styles need !important) */
     @media (max-width: 768px) {
       #hero {
-        height: auto !important;
-        min-height: 100vh !important;
+        height: 350vh !important;
         display: flex !important;
         flex-direction: column !important;
       }
@@ -208,16 +205,18 @@
         justify-content: flex-start !important;
         flex-shrink: 0;
       }
-      #hero-canvas-wrap { display: none !important; }
-      #hero-mobile-img {
-        display: flex !important;
-        align-items: center;
-        justify-content: center;
-        background: #FFFFFF;
-        padding: 32px 24px;
-        margin-top: 32px;
-        margin-bottom: 40px;
-        width: 100%;
+      #hero-canvas-wrap {
+        position: relative !important;
+        top: auto !important;
+        right: auto !important;
+        width: 100% !important;
+        height: 60vh !important;
+        flex: 1;
+      }
+      #hero-canvas {
+        position: sticky !important;
+        top: 0 !important;
+        height: 60vh !important;
       }
     }
 
@@ -563,11 +562,6 @@
       "></canvas>
     </div>
 
-    <!-- MOBILE: immagine statica (sostituisce canvas) -->
-    <div id="hero-mobile-img">
-      <img src="frames/frame_0143.jpg" alt="CreatorLab" style="width: 85%; max-width: 340px; margin: 0 auto; display: block;">
-    </div>
-
   </section>
 
   <!-- SECTION 2: PROBLEMA -->
@@ -783,7 +777,6 @@
   })();
 
   /* ── FRAME SEQUENCE ── */
-  const isMobile = window.innerWidth <= 768;
   const FC = 143;
   const frames = [];
   let loaded=0, curFrame=-1, ticking=false;
@@ -792,14 +785,7 @@
   const fCanvas   = document.getElementById('hero-canvas');
   const fCtx      = fCanvas.getContext('2d');
 
-  // Mobile: skip frame loading entirely
-  if(isMobile){
-    loader.style.opacity='0';
-    setTimeout(()=>{ loader.style.display='none'; },400);
-  }
-
   function resizeFC(){
-    if(isMobile) return;
     const dpr=window.devicePixelRatio||1;
     const wrap=document.getElementById('hero-canvas-wrap');
     const w=wrap.offsetWidth||window.innerWidth/2;
@@ -828,21 +814,20 @@
     drawFrame(0); curFrame=0;
   }
 
-  if(!isMobile){
-    for(let i=1;i<=FC;i++){
-      const img=new Image();
-      img.src=`frames/frame_${String(i).padStart(4,'0')}.jpg`;
-      const tick=()=>{
-        loaded++;
-        loaderFill.style.width=(loaded/FC*100)+'%';
-        if(loaded===FC) onDone();
-      };
-      img.onload=tick; img.onerror=tick;
-      frames.push(img);
-    }
-    resizeFC();
-    window.addEventListener('resize',resizeFC);
+  for(let i=1;i<=FC;i++){
+    const img=new Image();
+    img.src=`frames/frame_${String(i).padStart(4,'0')}.jpg`;
+    const tick=()=>{
+      loaded++;
+      loaderFill.style.width=(loaded/FC*100)+'%';
+      if(loaded===FC) onDone();
+    };
+    img.onload=tick; img.onerror=tick;
+    frames.push(img);
   }
+
+  resizeFC();
+  window.addEventListener('resize',resizeFC);
 
   /* ── SCROLL HANDLER ── */
   const heroSection = document.getElementById('hero');
@@ -855,12 +840,10 @@
         const total=document.body.scrollHeight-window.innerHeight;
         progressBar.style.width=(sy/total*100)+'%';
 
-        if(!isMobile){
-          const scrollable=heroSection.offsetHeight-window.innerHeight;
-          const prog=Math.min(1,Math.max(0,(sy-heroSection.offsetTop)/scrollable));
-          const fi=Math.min(FC-1,Math.floor(prog*(FC-1)));
-          if(fi!==curFrame){ curFrame=fi; drawFrame(fi); }
-        }
+        const scrollable=heroSection.offsetHeight-window.innerHeight;
+        const prog=Math.min(1,Math.max(0,(sy-heroSection.offsetTop)/scrollable));
+        const fi=Math.min(FC-1,Math.floor(prog*(FC-1)));
+        if(fi!==curFrame){ curFrame=fi; drawFrame(fi); }
 
         ticking=false;
       });
