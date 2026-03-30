@@ -125,6 +125,49 @@
       font-size: 0.875rem; font-weight: 500; transition: color 0.2s;
     }
     .nav-links a:hover { color: var(--text); }
+
+    /* ── DROPDOWN SERVIÇOS ── */
+    .nav-dropdown { position: relative; }
+    .nav-dropdown > a { display: flex; align-items: center; gap: 4px; }
+    .nav-dropdown > a::after {
+      content: ''; width: 8px; height: 5px;
+      background: currentColor;
+      clip-path: polygon(0 0, 100% 0, 50% 100%);
+      opacity: 0.5; transition: opacity 0.2s;
+    }
+    .nav-dropdown:hover > a::after { opacity: 1; }
+    .dropdown-menu {
+      position: absolute; top: calc(100% + 12px); left: 50%;
+      transform: translateX(-50%);
+      background: rgba(14,14,14,0.97);
+      border: 1px solid rgba(255,255,255,0.1);
+      backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+      border-radius: 16px; padding: 8px;
+      min-width: 240px;
+      opacity: 0; visibility: hidden; pointer-events: none;
+      transition: opacity 0.2s ease, transform 0.2s ease;
+      transform: translateX(-50%) translateY(-6px);
+    }
+    .nav-dropdown:hover .dropdown-menu {
+      opacity: 1; visibility: visible; pointer-events: auto;
+      transform: translateX(-50%) translateY(0);
+    }
+    .dropdown-menu a {
+      display: block; padding: 10px 16px;
+      border-radius: 10px; font-size: 0.82rem;
+      color: var(--muted) !important;
+      transition: background 0.15s, color 0.15s !important;
+    }
+    .dropdown-menu a:hover {
+      background: rgba(255,255,255,0.06);
+      color: var(--text) !important;
+    }
+    .dropdown-menu a span {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.62rem; letter-spacing: 1.5px;
+      color: var(--accent); margin-right: 8px; opacity: 0.8;
+    }
+
     .nav-cta {
       background: var(--accent) !important; color: #000 !important;
       padding: 8px 20px !important; border-radius: 100px;
@@ -487,7 +530,17 @@
     <div class="nav-inner">
       <a href="#" class="nav-logo"><img src="logo-creator-lab.png" alt="CreatorLab"></a>
       <div class="nav-links">
-        <a href="#solucao">Serviços</a>
+        <div class="nav-dropdown">
+          <a href="#solucao">Serviços</a>
+          <div class="dropdown-menu">
+            <a href="servico-trafego-pago.html"><span>01</span>Tráfego Pago</a>
+            <a href="servico-conteudo-criativos.html"><span>02</span>Conteúdo & Criativos</a>
+            <a href="servico-organico.html"><span>03</span>Orgânico</a>
+            <a href="servico-crm-retencao.html"><span>04</span>CRM & Retenção</a>
+            <a href="servico-influenciadores.html"><span>05</span>Influenciadores</a>
+            <a href="servico-avatar-ia.html"><span>06</span>Avatar IA & Multilíngue</a>
+          </div>
+        </div>
         <a href="#como-funciona">Como funciona</a>
         <a href="#diferenciais">Diferenciais</a>
         <a href="#cta-final" class="nav-cta">Agende uma conversa</a>
@@ -501,8 +554,8 @@
   <!-- MOBILE MENU -->
   <div class="mob-menu" id="mobMenu">
     <button class="mob-close" onclick="toggleMenu()">✕</button>
-    <a href="#como-funciona" onclick="toggleMenu()">Como funciona</a>
     <a href="#solucao" onclick="toggleMenu()">Serviços</a>
+    <a href="#como-funciona" onclick="toggleMenu()">Como funciona</a>
     <a href="#diferenciais" onclick="toggleMenu()">Diferenciais</a>
     <a href="#cta-final" onclick="toggleMenu()" style="color:var(--accent)">Agende uma conversa</a>
   </div>
@@ -525,11 +578,11 @@
     ">
       <span style="font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.2em; color: #7AFF2E; text-transform: uppercase; margin-bottom: 24px;">Creators. Growth. Sales.</span>
       <h1 style="font-family: 'Space Grotesk', sans-serif; font-size: clamp(2.2rem, 3.5vw, 3.8rem); font-weight: 900; line-height: 1.05; color: #FFFFFF; margin-bottom: 20px;">
-        Uma operação.<br>
-        <span style="color: #7AFF2E;">Tudo integrado.</span>
+        Pare de gerenciar fornecedores.<br>
+        <span style="color: #7AFF2E;">Comece a escalar.</span>
       </h1>
       <p style="font-family: 'Inter', sans-serif; font-size: 1rem; color: #8A8A8A; line-height: 1.7; max-width: 380px; margin-bottom: 36px;">
-        Tráfego, conteúdo, creators e CRM em uma única parceria orientada a receita.
+        Uma única parceria que conecta tráfego, conteúdo, creators e retenção — e responde pelo resultado final, não pela entrega de tarefas.
       </p>
       <a id="hero-btn" href="#cta-final" style="
         display: inline-flex; align-items: center; gap: 8px;
@@ -539,7 +592,7 @@
         text-decoration: none; width: fit-content;
         box-shadow: 0 0 24px rgba(122,255,46,0.3);
         transition: all 0.3s ease;
-      ">Agende sua consulta gratuita</a>
+      ">Quero meu diagnóstico gratuito</a>
     </div>
 
     <!-- COLONNA DESTRA: canvas scroll animation -->
@@ -567,46 +620,46 @@
   <section id="problema">
     <div class="inner">
       <h2 class="prob-h2 reveal"><em>5 fornecedores.</em><br>Nenhum responsável pelo resultado.</h2>
-      <p class="prob-p reveal d2">Sua marca tem agência de tráfego, de conteúdo, de influenciadores, consultor estratégico e CRM. Cada um entrega a sua parte. Ninguém é dono do crescimento.</p>
+      <p class="prob-p reveal d2">Sua marca tem agência de tráfego, de conteúdo, de influenciadores, consultor estratégico e CRM. Você passa horas em reuniões explicando contexto para fornecedores que mal se conhecem. Cada um entrega a sua parte — e ninguém é responsável quando o resultado não aparece. Você gerencia fornecedores em vez de escalar a marca.</p>
     </div>
   </section>
 
   <!-- SECTION 3: SOLUÇÃO -->
   <section id="solucao">
     <div class="inner">
-      <span class="s-label reveal">A solução</span>
+      <span class="s-label reveal">A SOLUÇÃO</span>
       <h2 class="s-title reveal">CreatorLab é diferente.</h2>
       <p class="s-sub reveal d1">Uma operação integrada em 6 blocos — todos conectados, todos orientados a receita.</p>
       <div class="cards-grid">
         <div class="svc-card reveal d1">
           <div class="icon-box"><i data-lucide="bar-chart-2"></i></div>
           <h3 class="card-t">Tráfego Pago</h3>
-          <p class="card-d">Meta, Google e TikTok Ads otimizados por CPA, ROAS e LTV.</p>
+          <p class="card-d">Mais compradores, custo menor por venda. Meta, Google e TikTok Ads geridos por quem responde pelo ROAS — não pela entrega de campanha.</p>
         </div>
         <div class="svc-card reveal d2">
           <div class="icon-box"><i data-lucide="video"></i></div>
           <h3 class="card-t">Conteúdo & Criativos</h3>
-          <p class="card-d">Roteiros, UGC e ads criativos orientados a venda.</p>
+          <p class="card-d">Criativos que vendem, não que impressionam. Roteiros, UGC e peças prontas para o feed e para cada etapa do funil.</p>
         </div>
         <div class="svc-card reveal d3">
           <div class="icon-box"><i data-lucide="trending-up"></i></div>
           <h3 class="card-t">Orgânico</h3>
-          <p class="card-d">Séries virais, calendário editorial e construção de autoridade.</p>
+          <p class="card-d">Presença que gera demanda mesmo quando o tráfego pago para. Séries virais, calendário editorial e construção de autoridade a longo prazo.</p>
         </div>
         <div class="svc-card reveal d4">
           <div class="icon-box"><i data-lucide="repeat"></i></div>
           <h3 class="card-t">CRM & Retenção</h3>
-          <p class="card-d">E-mail, WhatsApp e fluxos de recompra para maximizar LTV.</p>
+          <p class="card-d">Cada cliente que comprou uma vez é trabalhado para comprar de novo. E-mail, WhatsApp e fluxos de recompra — sem esforço da sua equipe.</p>
         </div>
         <div class="svc-card reveal d5">
           <div class="icon-box"><i data-lucide="users"></i></div>
           <h3 class="card-t">Influenciadores</h3>
-          <p class="card-d">Nano a embaixadores com rastreamento de performance e UGC.</p>
+          <p class="card-d">Creators que vendem, com rastreamento de resultado — não só de alcance. De nano-influenciadores a embaixadores, com UGC integrado à estratégia.</p>
         </div>
         <div class="svc-card reveal d6">
           <div class="icon-box"><i data-lucide="bot"></i></div>
           <h3 class="card-t">Avatar IA & Multilíngue</h3>
-          <p class="card-d">Conteúdo de venda com avatares IA em múltiplos idiomas.</p>
+          <p class="card-d">Escale para novos mercados sem refilmar. Conteúdo de venda com avatares IA adaptados por idioma e público-alvo.</p>
         </div>
       </div>
     </div>
@@ -622,21 +675,21 @@
           <span class="step-n">01</span>
           <div>
             <h3 class="step-t">Diagnóstico</h3>
-            <p class="step-d">Kickoff completo: metas, funil, análise de mercado e plano de 90 dias.</p>
+            <p class="step-d">Kickoff completo: mapeamos metas de receita, auditamos o funil atual, analisamos concorrentes e entregamos um plano de 90 dias — antes de gastar R$1 em mídia.</p>
           </div>
         </div>
         <div class="step reveal d2">
           <span class="step-n">02</span>
           <div>
             <h3 class="step-t">Execução</h3>
-            <p class="step-d">Operação integrada dos 6 blocos com rituais semanais e otimização contínua.</p>
+            <p class="step-d">Operação integrada dos 6 blocos com rituais semanais, dashboards em tempo real e otimização contínua. Um único ponto de contato para tudo.</p>
           </div>
         </div>
         <div class="step reveal d3">
           <span class="step-n">03</span>
           <div>
             <h3 class="step-t">Escala</h3>
-            <p class="step-d">Criativos vencedores escalados, novos segmentos abertos, LTV e recompra ativados.</p>
+            <p class="step-d">Criativos vencedores escalados, novos segmentos abertos, LTV e recompra ativados — enquanto você foca em produto e operação.</p>
           </div>
         </div>
       </div>
@@ -650,31 +703,31 @@
       <h2 class="s-title reveal">O que nos separa das agências tradicionais</h2>
       <div class="dif-list">
         <div class="dif-item reveal">
-          <div class="icon-box"><i data-lucide="target"></i></div>
-          <div>
-            <h3 class="dif-t">Estratégia ANTES da execução</h3>
-            <p class="dif-d">Análise de mercado, funnel hacking e diagnóstico completo antes de qualquer ação.</p>
-          </div>
-        </div>
-        <div class="dif-item reveal d1">
-          <div class="icon-box"><i data-lucide="layers"></i></div>
-          <div>
-            <h3 class="dif-t">Operação integrada</h3>
-            <p class="dif-d">Um único parceiro para tráfego, conteúdo, creators e retenção. Sem ruídos entre fornecedores.</p>
-          </div>
-        </div>
-        <div class="dif-item reveal d2">
-          <div class="icon-box"><i data-lucide="cpu"></i></div>
-          <div>
-            <h3 class="dif-t">IA-first</h3>
-            <p class="dif-d">Operação acelerada por IA para volume de criativos, testes e decisões guiadas por dados.</p>
-          </div>
-        </div>
-        <div class="dif-item reveal d3">
           <div class="icon-box"><i data-lucide="activity"></i></div>
           <div>
             <h3 class="dif-t">Modelo orientado a resultado</h3>
-            <p class="dif-d">Decisões guiadas por métricas. ROAS, CPA, LTV — não por entrega de tarefas.</p>
+            <p class="dif-d">Você não contrata entrega de tarefas. Você contrata crescimento. Cada decisão é guiada por ROAS, CPA e LTV — não por relatório de impressões.</p>
+          </div>
+        </div>
+        <div class="dif-item reveal d1">
+          <div class="icon-box"><i data-lucide="target"></i></div>
+          <div>
+            <h3 class="dif-t">Estratégia ANTES da execução</h3>
+            <p class="dif-d">Enquanto outras agências já estão subindo campanha, a gente ainda está entendendo seu mercado. Análise competitiva, mapeamento de avatar, funil hacking e plano de 90 dias — antes de qualquer ação.</p>
+          </div>
+        </div>
+        <div class="dif-item reveal d2">
+          <div class="icon-box"><i data-lucide="layers"></i></div>
+          <div>
+            <h3 class="dif-t">Operação integrada</h3>
+            <p class="dif-d">Um único parceiro para tráfego, conteúdo, creators e retenção. Sem reunião de alinhamento entre fornecedores que nunca se falam. Sem você no meio explicando o óbvio.</p>
+          </div>
+        </div>
+        <div class="dif-item reveal d3">
+          <div class="icon-box"><i data-lucide="cpu"></i></div>
+          <div>
+            <h3 class="dif-t">IA-first</h3>
+            <p class="dif-d">Usamos IA para gerar volume de criativos, rodar testes em paralelo e tomar decisões baseadas em dados — não em feeling de equipe.</p>
           </div>
         </div>
       </div>
@@ -692,19 +745,19 @@
           <div class="phase-dot"></div>
           <span class="phase-badge">0–30 dias</span>
           <h3 class="phase-t">Diagnóstico & Setup</h3>
-          <p class="phase-d">Metas, funil, tracking, análise de mercado, primeiros criativos.</p>
+          <p class="phase-d">Mapeamento de metas de receita, auditoria do funil, tracking, análise de mercado e primeiros criativos. Nenhuma campanha sobe sem plano aprovado.</p>
         </div>
         <div class="phase">
           <div class="phase-dot"></div>
           <span class="phase-badge">31–60 dias</span>
           <h3 class="phase-t">Escala & Otimização</h3>
-          <p class="phase-d">Criativos vencedores escalados, UGC, retarget, primeiros fluxos CRM.</p>
+          <p class="phase-d">Criativos vencedores escalados, UGC em produção, retarget ativo e primeiros fluxos CRM rodando.</p>
         </div>
         <div class="phase">
           <div class="phase-dot"></div>
           <span class="phase-badge">61–150 dias</span>
           <h3 class="phase-t">Crescimento & LTV</h3>
-          <p class="phase-d">Novos segmentos, recompra, dashboards, governança e expansão.</p>
+          <p class="phase-d">Novos segmentos abertos, recompra ativada, dashboards de governança e expansão para novos mercados.</p>
         </div>
       </div>
     </div>
@@ -715,10 +768,10 @@
     <div class="inner">
       <div class="cta-glow"></div>
       <span class="s-label reveal">Próximo passo</span>
-      <h2 class="cta-h2 reveal">Pronto para parar de<br>gerenciar fornecedores?</h2>
-      <p class="cta-p reveal d1">Agende uma conversa de 45 minutos. Diagnóstico gratuito, sem compromisso.</p>
-      <a href="https://wa.me/placeholder" class="btn-cta reveal d2">Agende sua consulta gratuita</a>
-      <p class="cta-note reveal d3">Atendemos marcas com ambição de escala — cosméticos, moda, saúde, nutracêuticos e mais.</p>
+      <h2 class="cta-h2 reveal">Pronto para ter um parceiro — e não mais um fornecedor?</h2>
+      <p class="cta-p reveal d1">Agende uma conversa de 45 minutos. Vamos auditar seu funil atual e mostrar onde está o crescimento que você está deixando na mesa.</p>
+      <a href="https://wa.me/placeholder" class="btn-cta reveal d2">Quero meu diagnóstico gratuito</a>
+      <p class="cta-note reveal d3">Diagnóstico gratuito, sem compromisso. Atendemos marcas em cosméticos, moda, saúde e nutracêuticos com ambição real de escala.</p>
     </div>
   </section>
 

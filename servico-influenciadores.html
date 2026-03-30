@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Influenciadores — CreatorLab</title>
+  <meta name="description" content="Da curadoria ao rastreamento de performance — influenciadores integrados à estratégia, com resultado mensurável.">
+  <link rel="icon" type="image/png" href="logo-creator-lab.png">
+  <link rel="apple-touch-icon" href="logo-creator-lab.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700;900&family=Inter:wght@400;500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    :root{--bg:#0A0A0A;--accent:#7AFF2E;--accent2:#39E75F;--accent-rgb:122,255,46;--text:#FFFFFF;--muted:#8A8A8A;--card-bg:rgba(255,255,255,0.04);--card-border:rgba(255,255,255,0.08);}
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}html{scroll-behavior:smooth;}body{background:var(--bg);color:var(--text);font-family:'Inter',sans-serif;line-height:1.6;overflow-x:hidden;}::selection{background:var(--accent);color:#000;}::-webkit-scrollbar{width:6px;}::-webkit-scrollbar-track{background:#111;}::-webkit-scrollbar-thumb{background:rgba(255,255,255,0.1);border-radius:3px;}::-webkit-scrollbar-thumb:hover{background:var(--accent);}
+    #starscape{position:fixed;top:0;left:0;width:100%;height:100%;z-index:0;pointer-events:none;opacity:0.5;}
+    .bg-orb{position:fixed;border-radius:50%;filter:blur(120px);pointer-events:none;z-index:1;animation:floatOrb 14s ease-in-out infinite;}.bg-orb-1{width:600px;height:600px;background:rgba(122,255,46,0.055);top:-180px;right:-80px;animation-delay:0s;}.bg-orb-2{width:420px;height:420px;background:rgba(57,231,95,0.04);bottom:25%;left:-120px;animation-delay:-7s;}@keyframes floatOrb{0%,100%{transform:translate(0,0) scale(1);}33%{transform:translate(28px,-38px) scale(1.06);}66%{transform:translate(-18px,22px) scale(0.94);}}
+    #scrollProgress{position:fixed;top:0;left:0;height:3px;width:0%;background:linear-gradient(90deg,var(--accent),var(--accent2));z-index:10000;transition:width 0.1s linear;}
+    #navbar{position:fixed;top:16px;left:0;right:0;z-index:1000;padding:0 24px;transition:all 0.4s cubic-bezier(0.16,1,0.3,1);}.nav-inner{max-width:1200px;margin:0 auto;padding:14px 32px;display:flex;justify-content:space-between;align-items:center;transition:all 0.4s cubic-bezier(0.16,1,0.3,1);}#navbar.scrolled .nav-inner{max-width:860px;background:rgba(10,10,10,0.85);border:1px solid rgba(255,255,255,0.1);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-radius:100px;padding:10px 24px;}.nav-logo{display:flex;align-items:center;text-decoration:none;}.nav-logo img{height:32px;width:auto;}.nav-links{display:flex;align-items:center;gap:28px;}.nav-links a{color:var(--muted);text-decoration:none;font-size:0.875rem;font-weight:500;transition:color 0.2s;}.nav-links a:hover{color:var(--text);}.nav-cta{background:var(--accent)!important;color:#000!important;padding:8px 20px!important;border-radius:100px;font-weight:700!important;box-shadow:0 0 20px rgba(var(--accent-rgb),0.3);transition:all 0.2s!important;}.nav-cta:hover{box-shadow:0 0 32px rgba(var(--accent-rgb),0.5)!important;transform:translateY(-1px);filter:brightness(1.08);}.nav-hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:4px;}.nav-hamburger span{display:block;width:24px;height:2px;background:var(--text);border-radius:1px;}.mob-menu{display:none;position:fixed;inset:0;background:rgba(10,10,10,0.97);backdrop-filter:blur(20px);z-index:999;flex-direction:column;align-items:center;justify-content:center;gap:36px;}.mob-menu.open{display:flex;}.mob-menu a{font-family:'Space Grotesk',sans-serif;font-size:1.6rem;font-weight:700;color:var(--text);text-decoration:none;transition:color 0.2s;}.mob-menu a:hover{color:var(--accent);}.mob-close{position:absolute;top:24px;right:28px;font-size:1.8rem;cursor:pointer;background:none;border:none;color:var(--muted);}@media(max-width:768px){.nav-links{display:none;}.nav-hamburger{display:flex;}}
+    section{position:relative;z-index:2;}.inner{max-width:1140px;margin:0 auto;padding:100px 32px;}@media(max-width:768px){.inner{padding:64px 20px;}}.s-label{font-family:'JetBrains Mono',monospace;font-size:0.7rem;letter-spacing:3px;text-transform:uppercase;color:var(--accent);display:block;margin-bottom:14px;}.s-title{font-family:'Space Grotesk',sans-serif;font-size:clamp(2rem,4vw,3rem);font-weight:700;line-height:1.15;letter-spacing:-0.02em;margin-bottom:14px;}
+    #hero{padding-top:140px;padding-bottom:80px;position:relative;z-index:2;}#hero .inner{padding-top:0;padding-bottom:0;}.hero-label{font-family:'JetBrains Mono',monospace;font-size:0.7rem;letter-spacing:3px;text-transform:uppercase;color:var(--accent);display:block;margin-bottom:20px;}.hero-h1{font-family:'Space Grotesk',sans-serif;font-size:clamp(2.4rem,5vw,4rem);font-weight:900;line-height:1.05;letter-spacing:-0.03em;margin-bottom:20px;}.hero-h1 span{color:var(--accent);}.hero-sub{font-size:clamp(1rem,1.4vw,1.15rem);color:var(--muted);max-width:560px;line-height:1.75;}
+    .text-section .inner{padding-top:80px;padding-bottom:80px;}.text-section h2{font-family:'Space Grotesk',sans-serif;font-size:clamp(1.6rem,3vw,2.2rem);font-weight:700;letter-spacing:-0.02em;margin-bottom:20px;line-height:1.2;}.text-section p{font-size:1rem;color:var(--muted);line-height:1.8;max-width:720px;}.text-section.alt{background:rgba(255,255,255,0.018);}
+    #incluso{background:rgba(255,255,255,0.018);}.check-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;margin-top:40px;}@media(max-width:640px){.check-grid{grid-template-columns:1fr;}}.check-item{display:flex;align-items:flex-start;gap:12px;padding:16px 20px;background:var(--card-bg);border:1px solid var(--card-border);border-radius:12px;}.check-item svg{width:20px;height:20px;stroke:var(--accent);stroke-width:2;flex-shrink:0;margin-top:2px;}.check-item span{font-size:0.9rem;color:var(--text);line-height:1.5;}
+    .steps{display:flex;gap:40px;position:relative;align-items:flex-start;}.steps::before{content:'';position:absolute;top:22px;left:10%;right:10%;height:1px;background:linear-gradient(90deg,transparent,rgba(var(--accent-rgb),0.25),transparent);}.step{flex:1;text-align:center;}.step-n{font-family:'JetBrains Mono',monospace;font-size:2.8rem;font-weight:500;color:var(--accent);opacity:0.28;line-height:1;display:block;margin-bottom:14px;}.step-t{font-family:'Space Grotesk',sans-serif;font-size:1.1rem;font-weight:700;margin-bottom:10px;}.step-d{font-size:0.875rem;color:var(--muted);line-height:1.7;}@media(max-width:768px){.steps{flex-direction:column;gap:28px;}.steps::before{display:none;}.step{text-align:left;display:flex;gap:20px;align-items:flex-start;}.step-n{font-size:2rem;min-width:44px;flex-shrink:0;}}
+    #resultado .inner{padding-top:80px;padding-bottom:80px;}.resultado-box{border:1px solid rgba(var(--accent-rgb),0.35);border-radius:20px;padding:48px;background:rgba(var(--accent-rgb),0.04);position:relative;overflow:hidden;}.resultado-box::before{content:'';position:absolute;top:-60px;right:-60px;width:200px;height:200px;border-radius:50%;background:radial-gradient(circle,rgba(var(--accent-rgb),0.08) 0%,transparent 70%);pointer-events:none;}.resultado-box p{font-family:'Space Grotesk',sans-serif;font-size:clamp(1.1rem,2vw,1.4rem);font-weight:500;line-height:1.65;color:var(--text);position:relative;z-index:1;}
+    #cta-final{text-align:center;overflow:hidden;}#cta-final .inner{padding:120px 32px 100px;}.cta-glow{position:absolute;width:800px;height:800px;border-radius:50%;pointer-events:none;background:radial-gradient(circle,rgba(var(--accent-rgb),0.06) 0%,transparent 65%);top:50%;left:50%;transform:translate(-50%,-50%);}.cta-h2{font-family:'Space Grotesk',sans-serif;font-size:clamp(2rem,4.5vw,3.5rem);font-weight:900;letter-spacing:-0.025em;line-height:1.1;margin-bottom:18px;position:relative;z-index:2;}.cta-p{font-size:1.1rem;color:var(--muted);margin-bottom:40px;position:relative;z-index:2;}.btn-cta{display:inline-block;background:var(--accent);color:#000;font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:1.1rem;padding:20px 52px;border-radius:100px;text-decoration:none;box-shadow:0 0 36px rgba(var(--accent-rgb),0.35);transition:all 0.3s ease;position:relative;z-index:2;}.btn-cta:hover{filter:brightness(1.1);transform:translateY(-2px);box-shadow:0 0 60px rgba(var(--accent-rgb),0.55);}@media(max-width:768px){#cta-final .inner{padding:72px 20px;}}
+    footer{border-top:1px solid rgba(255,255,255,0.06);position:relative;z-index:2;}.foot-inner{max-width:1140px;margin:0 auto;padding:60px 32px 40px;display:flex;flex-direction:column;align-items:center;gap:20px;text-align:center;}.foot-logo img{height:32px;width:auto;}.foot-tag{font-family:'JetBrains Mono',monospace;font-size:0.68rem;letter-spacing:3.5px;text-transform:uppercase;color:var(--muted);}.foot-links{display:flex;gap:28px;}.foot-links a{color:var(--muted);text-decoration:none;font-size:0.875rem;display:flex;align-items:center;gap:6px;transition:color 0.2s;}.foot-links a:hover{color:var(--accent);}.foot-copy{font-size:0.75rem;color:rgba(255,255,255,0.2);}
+    .reveal{opacity:0;transform:translateY(28px);transition:opacity 0.65s ease,transform 0.65s ease;}.reveal.in{opacity:1;transform:none;}.d1{transition-delay:0.1s;}.d2{transition-delay:0.2s;}.d3{transition-delay:0.3s;}
+  </style>
+</head>
+<body>
+  <canvas id="starscape"></canvas>
+  <div class="bg-orb bg-orb-1"></div><div class="bg-orb bg-orb-2"></div>
+  <div id="scrollProgress"></div>
+
+  <nav id="navbar"><div class="nav-inner">
+    <a href="index.html" class="nav-logo"><img src="logo-creator-lab.png" alt="CreatorLab"></a>
+    <div class="nav-links">
+      <a href="index.html#solucao">Serviços</a>
+      <a href="index.html#como-funciona">Como funciona</a>
+      <a href="index.html#diferenciais">Diferenciais</a>
+      <a href="index.html#cta-final" class="nav-cta">Agende uma conversa</a>
+    </div>
+    <div class="nav-hamburger" id="hamburger" onclick="toggleMenu()"><span></span><span></span><span></span></div>
+  </div></nav>
+  <div class="mob-menu" id="mobMenu">
+    <button class="mob-close" onclick="toggleMenu()">✕</button>
+    <a href="index.html#solucao" onclick="toggleMenu()">Serviços</a>
+    <a href="index.html#como-funciona" onclick="toggleMenu()">Como funciona</a>
+    <a href="index.html#diferenciais" onclick="toggleMenu()">Diferenciais</a>
+    <a href="index.html#cta-final" onclick="toggleMenu()" style="color:var(--accent)">Agende uma conversa</a>
+  </div>
+
+  <section id="hero"><div class="inner">
+    <span class="hero-label reveal">Serviço 05</span>
+    <h1 class="hero-h1 reveal d1">Creators que vendem.<br><span>Não só que aparecem.</span></h1>
+    <p class="hero-sub reveal d2">Da curadoria ao rastreamento de performance — influenciadores integrados à estratégia, com resultado mensurável.</p>
+  </div></section>
+
+  <section class="text-section alt"><div class="inner">
+    <span class="s-label reveal">O Problema</span>
+    <h2 class="reveal d1">Você investe em influenciadores e não sabe o que voltou.</h2>
+    <p class="reveal d2">O modelo tradicional de influenciadores funciona assim: você paga, o creator posta, você torce para aparecer alguma venda. Sem rastreamento, sem funil, sem dado de retorno. Resultado: orçamento gasto, alcance gerado, venda incerta. E na próxima reunião você não consegue justificar o investimento.</p>
+  </div></section>
+
+  <section class="text-section"><div class="inner">
+    <span class="s-label reveal">A Solução</span>
+    <h2 class="reveal d1">Influenciadores como canal de performance — não de imagem.</h2>
+    <p class="reveal d2">Selecionamos, briefamos e gerimos creators com foco em resultado mensurável. Links rastreados, cupons de desconto, UGC reutilizável em anúncios — cada ação tem dado de retorno.</p>
+  </div></section>
+
+  <section id="incluso"><div class="inner">
+    <span class="s-label reveal">O que está incluído</span>
+    <h2 class="s-title reveal d1">Influenciadores que geram ROI rastreável.</h2>
+    <div class="check-grid">
+      <div class="check-item reveal d1"><svg viewBox="0 0 24 24" fill="none"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" stroke-linecap="round" stroke-linejoin="round"/><polyline points="22 4 12 14.01 9 11.01" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Curadoria e seleção de creators (nano a embaixadores)</span></div>
+      <div class="check-item reveal d1"><svg viewBox="0 0 24 24" fill="none"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" stroke-linecap="round" stroke-linejoin="round"/><polyline points="22 4 12 14.01 9 11.01" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Briefing estratégico orientado a conversão</span></div>
+      <div class="check-item reveal d2"><svg viewBox="0 0 24 24" fill="none"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" stroke-linecap="round" stroke-linejoin="round"/><polyline points="22 4 12 14.01 9 11.01" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Gestão do relacionamento com creators</span></div>
+      <div class="check-item reveal d2"><svg viewBox="0 0 24 24" fill="none"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" stroke-linecap="round" stroke-linejoin="round"/><polyline points="22 4 12 14.01 9 11.01" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Rastreamento de performance por creator (link, cupom, UTM)</span></div>
+      <div class="check-item reveal d3"><svg viewBox="0 0 24 24" fill="none"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" stroke-linecap="round" stroke-linejoin="round"/><polyline points="22 4 12 14.01 9 11.01" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Produção e reaproveitamento de UGC em anúncios pagos</span></div>
+      <div class="check-item reveal d3"><svg viewBox="0 0 24 24" fill="none"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" stroke-linecap="round" stroke-linejoin="round"/><polyline points="22 4 12 14.01 9 11.01" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Relatório de ROI por influenciador</span></div>
+      <div class="check-item reveal d3"><svg viewBox="0 0 24 24" fill="none"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" stroke-linecap="round" stroke-linejoin="round"/><polyline points="22 4 12 14.01 9 11.01" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Pipeline de testes com novos perfis</span></div>
+    </div>
+  </div></section>
+
+  <section id="como-funciona"><div class="inner">
+    <span class="s-label reveal">Como funciona</span>
+    <h2 class="s-title reveal d1">Da curadoria ao canal de performance.</h2>
+    <div class="steps" style="margin-top:48px;">
+      <div class="step reveal d1"><span class="step-n">01</span><div><h3 class="step-t">Curadoria</h3><p class="step-d">Mapeamos creators alinhados ao avatar da marca, analisamos métricas reais de engajamento e selecionamos os perfis com maior potencial de conversão.</p></div></div>
+      <div class="step reveal d2"><span class="step-n">02</span><div><h3 class="step-t">Ativação</h3><p class="step-d">Briefing, contrato, produção do conteúdo e publicação com tracking completo ativado.</p></div></div>
+      <div class="step reveal d3"><span class="step-n">03</span><div><h3 class="step-t">Análise e escala</h3><p class="step-d">Medimos o resultado real por creator. Os que performam entram num programa de parceria. O UGC gerado alimenta os anúncios pagos.</p></div></div>
+    </div>
+  </div></section>
+
+  <section id="resultado"><div class="inner">
+    <span class="s-label reveal">Resultado esperado</span>
+    <div class="resultado-box reveal d1">
+      <p>Um canal de influenciadores com ROI rastreável. UGC de qualidade que reduz o custo de produção criativa. Creators que se tornam embaixadores da marca ao longo do tempo.</p>
+    </div>
+  </div></section>
+
+  <section id="cta-final"><div class="inner">
+    <div class="cta-glow"></div>
+    <h2 class="cta-h2 reveal">Pronto para ter um parceiro — e não mais um fornecedor?</h2>
+    <p class="cta-p reveal d1">45 minutos. Avaliamos sua estratégia atual com influenciadores e onde estão as maiores oportunidades.</p>
+    <a href="index.html#cta-final" class="btn-cta reveal d2">Quero meu diagnóstico gratuito</a>
+  </div></section>
+
+  <footer><div class="foot-inner">
+    <div class="foot-logo"><img src="logo-creator-lab.png" alt="CreatorLab"></div>
+    <p class="foot-tag">Creators. Growth. Sales.</p>
+    <div class="foot-links">
+      <a href="#" aria-label="Instagram"><i data-lucide="instagram"></i> Instagram</a>
+      <a href="#" aria-label="LinkedIn"><i data-lucide="linkedin"></i> LinkedIn</a>
+    </div>
+    <p class="foot-copy">© 2026 CreatorLab. Todos os direitos reservados.</p>
+  </div></footer>
+
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+  <script>
+  lucide.createIcons();
+  (function(){const c=document.getElementById('starscape'),ctx=c.getContext('2d');let stars=[];function init(){const dpr=window.devicePixelRatio||1;c.width=window.innerWidth*dpr;c.height=window.innerHeight*dpr;c.style.width=window.innerWidth+'px';c.style.height=window.innerHeight+'px';stars=Array.from({length:180},()=>({x:Math.random()*c.width,y:Math.random()*c.height,r:(Math.random()*1.2+0.3)*dpr,op:Math.random()*0.6+0.2,dx:(Math.random()-0.5)*0.04*dpr,dy:(Math.random()-0.5)*0.02*dpr,ts:Math.random()*0.0008+0.0003,tp:Math.random()*Math.PI*2}));}function draw(){ctx.clearRect(0,0,c.width,c.height);const now=Date.now();stars.forEach(s=>{s.x+=s.dx;s.y+=s.dy;if(s.x<0)s.x=c.width;if(s.x>c.width)s.x=0;if(s.y<0)s.y=c.height;if(s.y>c.height)s.y=0;const op=Math.max(0,Math.min(1,s.op+Math.sin(now*s.ts+s.tp)*0.3));ctx.beginPath();ctx.arc(s.x,s.y,s.r,0,Math.PI*2);ctx.fillStyle=`rgba(255,255,255,${op})`;ctx.fill();});requestAnimationFrame(draw);}init();draw();window.addEventListener('resize',init);})();
+  const navbar=document.getElementById('navbar');window.addEventListener('scroll',()=>{navbar.classList.toggle('scrolled',window.scrollY>60);const doc=document.documentElement;document.getElementById('scrollProgress').style.width=((window.scrollY/(doc.scrollHeight-doc.clientHeight))*100)+'%';});
+  function toggleMenu(){document.getElementById('mobMenu').classList.toggle('open');}
+  const io=new IntersectionObserver((entries)=>{entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});},{threshold:0.12});document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+  </script>
+</body>
+</html>
