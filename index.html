@@ -193,30 +193,29 @@
     @media (max-width: 768px) {
       #hero {
         height: 350vh !important;
-        display: flex !important;
-        flex-direction: column !important;
+        display: block !important;
       }
       #hero-text {
         position: relative !important;
         top: auto !important;
         width: 100% !important;
         height: auto !important;
-        padding: 88px 24px 32px !important;
-        justify-content: flex-start !important;
-        flex-shrink: 0;
+        padding: 100px 24px 40px !important;
       }
       #hero-canvas-wrap {
-        position: relative !important;
-        top: auto !important;
-        right: auto !important;
-        width: 100% !important;
-        height: 60vh !important;
-        flex: 1;
-      }
-      #hero-canvas {
+        display: block !important;
         position: sticky !important;
         top: 0 !important;
-        height: 60vh !important;
+        right: auto !important;
+        width: 100% !important;
+        height: 100vh !important;
+        background: #FFFFFF !important;
+      }
+      #hero-canvas {
+        position: relative !important;
+        width: 100% !important;
+        height: 100vh !important;
+        background: transparent !important;
       }
     }
 
