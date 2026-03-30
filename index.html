@@ -128,7 +128,13 @@
 
     /* ── DROPDOWN SERVIÇOS ── */
     .nav-dropdown { position: relative; }
-    .nav-dropdown > a { display: flex; align-items: center; gap: 4px; }
+    /* FIX 3: ponte invisibile che copre il gap trigger → menu */
+    .nav-dropdown::after {
+      content: ''; position: absolute;
+      top: 100%; left: 0; width: 100%; height: 8px;
+      background: transparent;
+    }
+    .nav-dropdown > a { display: flex; align-items: center; gap: 4px; cursor: pointer; }
     .nav-dropdown > a::after {
       content: ''; width: 8px; height: 5px;
       background: currentColor;
@@ -136,26 +142,29 @@
       opacity: 0.5; transition: opacity 0.2s;
     }
     .nav-dropdown:hover > a::after { opacity: 1; }
+    /* FIX 1: top: 100% + padding-top invisibile, nessun gap */
     .dropdown-menu {
-      position: absolute; top: calc(100% + 12px); left: 50%;
-      transform: translateX(-50%);
+      position: absolute; top: 100%; left: 50%;
+      transform: translateX(-50%) translateY(-6px);
+      margin-top: 0; padding-top: 8px; padding-bottom: 8px; padding-left: 8px; padding-right: 8px;
       background: rgba(14,14,14,0.97);
       border: 1px solid rgba(255,255,255,0.1);
       backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
-      border-radius: 16px; padding: 8px;
+      border-radius: 16px;
       min-width: 240px;
       opacity: 0; visibility: hidden; pointer-events: none;
       transition: opacity 0.2s ease, transform 0.2s ease;
-      transform: translateX(-50%) translateY(-6px);
     }
+    /* FIX 2: hover sul contenitore padre .nav-dropdown */
     .nav-dropdown:hover .dropdown-menu {
       opacity: 1; visibility: visible; pointer-events: auto;
       transform: translateX(-50%) translateY(0);
     }
+    /* FIX 4: ogni link display:block, width:100%, cursor:pointer */
     .dropdown-menu a {
-      display: block; padding: 10px 16px;
+      display: block; width: 100%; padding: 10px 16px;
       border-radius: 10px; font-size: 0.82rem;
-      color: var(--muted) !important;
+      color: var(--muted) !important; cursor: pointer;
       transition: background 0.15s, color 0.15s !important;
     }
     .dropdown-menu a:hover {
