@@ -189,10 +189,13 @@
       box-shadow: 0 0 40px rgba(122,255,46,0.55) !important;
       transform: translateY(-2px) !important;
     }
+    /* Hide mobile img on desktop */
+    #hero-mobile-img { display: none; }
     /* Mobile overrides (inline styles need !important) */
     @media (max-width: 768px) {
       #hero {
-        height: 350vh !important;
+        height: auto !important;
+        min-height: 100vh !important;
         display: flex !important;
         flex-direction: column !important;
       }
@@ -205,18 +208,16 @@
         justify-content: flex-start !important;
         flex-shrink: 0;
       }
-      #hero-canvas-wrap {
-        position: relative !important;
-        top: auto !important;
-        right: auto !important;
-        width: 100% !important;
-        height: 60vh !important;
-        flex: 1;
-      }
-      #hero-canvas {
-        position: sticky !important;
-        top: 0 !important;
-        height: 60vh !important;
+      #hero-canvas-wrap { display: none !important; }
+      #hero-mobile-img {
+        display: flex !important;
+        align-items: center;
+        justify-content: center;
+        background: #FFFFFF;
+        padding: 32px 24px;
+        margin-top: 32px;
+        margin-bottom: 40px;
+        width: 100%;
       }
     }
 
@@ -562,6 +563,11 @@
       "></canvas>
     </div>
 
+    <!-- MOBILE: immagine statica (sostituisce canvas) -->
+    <div id="hero-mobile-img">
+      <img src="frames/frame_0143.jpg" alt="CreatorLab" style="width: 85%; max-width: 340px; margin: 0 auto; display: block;">
+    </div>
+
   </section>
 
   <!-- SECTION 2: PROBLEMA -->
@@ -777,6 +783,7 @@
   })();
 
   /* ── FRAME SEQUENCE ── */
+  const isMobile = window.innerWidth <= 768;
   const FC = 143;
   const frames = [];
   let loaded=0, curFrame=-1, ticking=false;
@@ -785,14 +792,20 @@
   const fCanvas   = document.getElementById('hero-canvas');
   const fCtx      = fCanvas.getContext('2d');
 
+  // Mobile: skip frame loading entirely
+  if(isMobile){
+    loader.style.opacity='0';
+    setTimeout(()=>{ loader.style.display='none'; },400);
+  }
+
   function resizeFC(){
+    if(isMobile) return;
     const dpr=window.devicePixelRatio||1;
     const wrap=document.getElementById('hero-canvas-wrap');
     const w=wrap.offsetWidth||window.innerWidth/2;
     const h=window.innerHeight;
     fCanvas.width = w*dpr;
     fCanvas.height= h*dpr;
-    // Don't override inline style width/height — CSS handles those
     if(curFrame>=0) drawFrame(curFrame);
   }
 
@@ -801,7 +814,6 @@
     if(!img||!img.complete||!img.naturalWidth) return;
     const cw=fCanvas.width, ch=fCanvas.height;
     fCtx.clearRect(0,0,cw,ch);
-    const ir=img.naturalWidth/img.naturalHeight;
     const scale=Math.min((cw*0.85)/img.naturalWidth,(ch*0.85)/img.naturalHeight);
     const dw=img.naturalWidth*scale;
     const dh=img.naturalHeight*scale;
@@ -816,20 +828,21 @@
     drawFrame(0); curFrame=0;
   }
 
-  for(let i=1;i<=FC;i++){
-    const img=new Image();
-    img.src=`frames/frame_${String(i).padStart(4,'0')}.jpg`;
-    const tick=()=>{
-      loaded++;
-      loaderFill.style.width=(loaded/FC*100)+'%';
-      if(loaded===FC) onDone();
-    };
-    img.onload=tick; img.onerror=tick;
-    frames.push(img);
+  if(!isMobile){
+    for(let i=1;i<=FC;i++){
+      const img=new Image();
+      img.src=`frames/frame_${String(i).padStart(4,'0')}.jpg`;
+      const tick=()=>{
+        loaded++;
+        loaderFill.style.width=(loaded/FC*100)+'%';
+        if(loaded===FC) onDone();
+      };
+      img.onload=tick; img.onerror=tick;
+      frames.push(img);
+    }
+    resizeFC();
+    window.addEventListener('resize',resizeFC);
   }
-
-  resizeFC();
-  window.addEventListener('resize',resizeFC);
 
   /* ── SCROLL HANDLER ── */
   const heroSection = document.getElementById('hero');
@@ -842,10 +855,12 @@
         const total=document.body.scrollHeight-window.innerHeight;
         progressBar.style.width=(sy/total*100)+'%';
 
-        const scrollable=heroSection.offsetHeight-window.innerHeight;
-        const prog=Math.min(1,Math.max(0,(sy-heroSection.offsetTop)/scrollable));
-        const fi=Math.min(FC-1,Math.floor(prog*(FC-1)));
-        if(fi!==curFrame){ curFrame=fi; drawFrame(fi); }
+        if(!isMobile){
+          const scrollable=heroSection.offsetHeight-window.innerHeight;
+          const prog=Math.min(1,Math.max(0,(sy-heroSection.offsetTop)/scrollable));
+          const fi=Math.min(FC-1,Math.floor(prog*(FC-1)));
+          if(fi!==curFrame){ curFrame=fi; drawFrame(fi); }
+        }
 
         ticking=false;
       });
